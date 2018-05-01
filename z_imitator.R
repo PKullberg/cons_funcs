@@ -1,7 +1,7 @@
 # Zonation imitator
 library(raster)
 
-suma = function(x) if (all(is.na(x))) x[NA_integer_] else sum(x, na.rm = TRUE)
+sumna <- function(x) if (all(is.na(x))) x[NA_integer_] else sum(x, na.rm = TRUE)
 
 z_priority <- function(features, z, g) {
   
@@ -13,8 +13,6 @@ z_priority <- function(features, z, g) {
   
   out_ras <- pr[ , ,1]
   rem_ord <- matrix(NA, ncell(out_ras), 2)
-
-  zs <- vector()
   
   for (i in 1:ncell(pr)){
     for (j in 1:dim(rr)[3]) {
@@ -22,7 +20,7 @@ z_priority <- function(features, z, g) {
       pr[,,j] <- z * sum(rr[,,j], na.rm = T)^(1 - z) * nr[,,j]
     }
     
-    V <- apply(pr, c(1, 2), function(x) suma(x^g)^(1/g))
+    V <- apply(pr, c(1, 2), function(x) sumna(x^g)^(1/g))
     
     w_mat <- which(V == min(V, na.rm = T), arr.ind = T)
     rem_ord[i, ] <- w_mat[sample(nrow(w_mat), size = 1), ]
