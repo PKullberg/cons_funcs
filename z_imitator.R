@@ -29,11 +29,8 @@ z_priority <- function(features, z, g) {
     rr[rem_ord[i, 1], rem_ord[i, 2], ] <- NA
     
     out_ras[rem_ord[i, 1], rem_ord[i, 2]] <- i 
-
   }
-  
-  plot(raster(out_ras))
-  zs
+  raster(out_ras)
 }
 
 r1 <- matrix(runif(100), 10, 10)
