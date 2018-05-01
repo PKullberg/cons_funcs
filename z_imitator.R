@@ -1,6 +1,7 @@
 # Zonation imitator
-# library(raster)
-# suma = function(x) if (all(is.na(x))) x[NA_integer_] else sum(x, na.rm = TRUE)
+library(raster)
+
+suma = function(x) if (all(is.na(x))) x[NA_integer_] else sum(x, na.rm = TRUE)
 
 z_priority <- function(features, z, g) {
   
@@ -35,8 +36,6 @@ z_priority <- function(features, z, g) {
   zs
 }
 
-zs1 <- z_priority(feat, 0.25, g = 50)
-
 r1 <- matrix(runif(100), 10, 10)
 r2 <- matrix(runif(100), 10, 10)
 r2[1:50] <- NA
@@ -51,4 +50,6 @@ r6 <- matrix(NA, 10, 10)
 r6[90:100] <- 1
 
 feat <- stack(raster(r1), raster(r2), raster(r3), raster(r4), raster(r5), raster(r6))
+
+zs1 <- z_priority(feat, 0.25, g = 50)
 
